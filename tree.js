@@ -148,6 +148,19 @@ class Tree {
     }
     return undefined;
     }
+
+    isBalanced() {
+    const check = (node) => {
+        if (!node) return 0;
+        const left = check(node.left);
+        if (left === -1) return -1;
+        const right = check(node.right);
+        if (right === -1) return -1;
+        if (Math.abs(left - right) > 1) return -1;
+        return 1 + Math.max(left, right);
+    };
+    return check(this.root) !== -1;
+    }
 }
 
 import {Tree, prettyPrint} from "./tree.js";
