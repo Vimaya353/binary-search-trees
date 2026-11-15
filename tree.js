@@ -53,6 +53,29 @@ class Tree {
             }
         }
     }
+
+    deleteItem(value) {
+    this.root = this.#delete(this.root, value);
+    }
+
+    #delete(node, value) {
+    if (!node) return null; 
+    if (value < node.data) {
+        node.left = this.#delete(node.left, value);
+    } else if (value > node.data) {
+        node.right = this.#delete(node.right, value);
+    } else {
+        if (!node.left) return node.right;   
+        if (!node.right) return node.left;   
+
+        
+        let successor = node.right;
+        while (successor.left) successor = successor.left;
+        node.data = successor.data;
+        node.right = this.#delete(node.right, successor.data);
+    }
+    return node;
+    }
 }
 
 import {Tree, prettyPrint} from "./tree.js";
