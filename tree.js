@@ -76,6 +76,20 @@ class Tree {
     }
     return node;
     }
+
+    levelOrderForEach(callback) {
+        if(typeof callback !== "function") {
+            throw new Error ("A callback is required");
+        }
+        if(!this.root) return;
+        const queue = [this.root];
+        while(queue.length > 0) {
+            const node = queue.shift();
+            callback(node.data);
+            if(node.left)queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+    }
 }
 
 import {Tree, prettyPrint} from "./tree.js";
