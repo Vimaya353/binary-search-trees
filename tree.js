@@ -90,6 +90,39 @@ class Tree {
             if (node.right) queue.push(node.right);
         }
     }
+
+    inOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("A callback is required");
+    const visit = (node) => {
+        if (!node) return;
+        visit(node.left);
+        callback(node.data);
+        visit(node.right);
+    };
+    visit(this.root);
+    }
+
+    preOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("A callback is required");
+    const visit = (node) => {
+        if (!node) return;
+        callback(node.data);
+        visit(node.left);
+        visit(node.right);
+    };
+    visit(this.root);
+    }
+
+    postOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("A callback is required");
+    const visit = (node) => {
+        if (!node) return;
+        visit(node.left);
+        visit(node.right);
+        callback(node.data);
+    };
+    visit(this.root);
+    }
 }
 
 import {Tree, prettyPrint} from "./tree.js";
