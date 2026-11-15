@@ -123,6 +123,22 @@ class Tree {
     };
     visit(this.root);
     }
+
+    height(value) {
+    let current = this.root;
+    while (current && current.data !== value) {
+        current = value < current.data ? current.left : current.right;
+    }
+    if (!current) return undefined;
+    return this.#nodeHeight(current);
+    }
+
+    #nodeHeight(node) {
+    if (!node) return -1;
+    return 1 + Math.max(this.#nodeHeight(node.left), this.#nodeHeight(node.right));
+    }
+
+    
 }
 
 import {Tree, prettyPrint} from "./tree.js";
