@@ -161,6 +161,14 @@ class Tree {
     };
     return check(this.root) !== -1;
     }
+
+    rebalance() {
+    const values = [];
+    this.inOrderForEach((value) => values.push(value));
+    this.root = this.#buildTree(values);
+    }
+
+    
 }
 
 import {Tree, prettyPrint} from "./tree.js";
