@@ -138,7 +138,16 @@ class Tree {
     return 1 + Math.max(this.#nodeHeight(node.left), this.#nodeHeight(node.right));
     }
 
-    
+    depth(value) {
+    let current = this.root;
+    let edges = 0;
+    while (current) {
+        if (value === current.data) return edges;
+        current = value < current.data ? current.left : current.right;
+        edges++;
+    }
+    return undefined;
+    }
 }
 
 import {Tree, prettyPrint} from "./tree.js";
